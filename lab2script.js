@@ -26,6 +26,7 @@ function fetchData() {
             response.json().then(function (data) {
                 console.log(data);
                 if (data.status === "success") {
+                    searchingTitleArray = [];
                     document.getElementById("demo").innerHTML =
                         formatBooks(data.data);
                 }
@@ -217,7 +218,7 @@ function searchArray() {
         if (typeof filteredArray !== 'undefined' && filteredArray.length > 0) {
             console.log('---Sorted Array---');
             sortedArray.forEach(element => {
-                searchingTitleArray.push(element);
+                // searchingTitleArray.push(element);
                 search += element + '<br>';
                 console.log(element);
             });
