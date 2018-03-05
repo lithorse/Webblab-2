@@ -2,6 +2,7 @@ const url = 'https://www.forverkliga.se/JavaScript/api/crud.php?';
 let key = '';     //old key: hC3jF
 let success = false;
 let searchingTitleArray = [];
+let callTimesLeft;
 
 function formatBooks(arr) {
     let str = "";
@@ -13,7 +14,20 @@ function formatBooks(arr) {
     return str;
 }
 
-function fetchData() {
+function fetchDataClick() {
+    fetchData(10);
+};
+
+function fetchData(x) {
+    if (x == 'undefined' || x < 1) {
+        callTimesLeft = 0;
+        return;
+    } else {
+        callTimesLeft = x;
+    }
+    callTimesLeft -= 1;
+
+    console.log(callTimesLeft);
     var request = new Request(url + 'op=select&key=' + key);
     fetch(request).then(
         function (response) {
@@ -28,11 +42,13 @@ function fetchData() {
                 if (data.status === "success") {
                     searchingTitleArray = [];
                     document.getElementById("demo").innerHTML =
-                        formatBooks(data.data);
+                        formatBooks(data.data) + '<br>' + 'Fetch succeeded in ' + (10 - callTimesLeft) + ' tries.';
                 }
                 else {
                     document.getElementById("demo").innerHTML =
                         data.status + ' ' + data.message;
+                    console.log('call times left: ' + callTimesLeft);
+                    fetchData(callTimesLeft);
                 }
             });
         }
