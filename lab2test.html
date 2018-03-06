@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <title>Webblab 2 - Javascript</title>
   <link rel="stylesheet" type="text/css" href="lab2style.css">
 </head>
 
@@ -10,12 +11,12 @@
   <div class="wrapper">
     <div class="dark-gray aside">
       <div class="header">Menu</div>
-      <button class="button" onclick="fetchDataClick();">📚 - Fetch Books</button>
-      <button class="button" onclick="addData()">📕 - Add Book</button>
-      <button class="button" onclick="modifyData()">🔧 - Modify Book</button>
-      <button class="button" onclick="deleteData()">🗑 - Delete Book</button>
+      <button class="button" onclick="fetchData(10);">📚 - Fetch Books</button>
+      <button class="button" onclick="addData(10, prompt('Enter title'), prompt('Enter author'));">📕 - Add Book</button>
+      <button class="button" onclick="modifyData(10, prompt('Enter id'), prompt('Enter title'), prompt('Enter author'));">🔧 - Modify Book</button>
+      <button class="button" onclick="deleteData(10, prompt('Enter id'));">🗑️ - Delete Book</button>
       <button class="button" onclick="getNewKey();">🔑 - Get New Key</button>
-      <input id="searchInput" oninput="searchArray();" type="text" value="Search Title">
+      <input id="searchInput" oninput="searchArray();" onfocus="this.value=''" type="text" value="Search Title">
       <div>
         <div id="searchResult"></div>
       </div>
@@ -23,7 +24,7 @@
     <header>
       <div class="header">Books!</div>
     </header>
-    <div id="demo" class="main">sadasd</div>
+    <div id="demo" class="main">Pick an option!</div>
   </div>
   <script src="lab2script.js"></script>
 </body>

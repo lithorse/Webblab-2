@@ -14,13 +14,11 @@ function formatBooks(arr) {
     return str;
 }
 
-function fetchDataClick() {
-    fetchData(10);
-};
-
 function fetchData(x) {
     if (x == 'undefined' || x < 1) {
         callTimesLeft = 0;
+        document.getElementById("demo").innerHTML = 
+            'Request failed after 10 tries.';
         return;
     } else {
         callTimesLeft = x;
@@ -42,7 +40,7 @@ function fetchData(x) {
                 if (data.status === "success") {
                     searchingTitleArray = [];
                     document.getElementById("demo").innerHTML =
-                        formatBooks(data.data) + '<br>' + 'Fetch succeeded in ' + (10 - callTimesLeft) + ' tries.';
+                        formatBooks(data.data) + '<br>' + 'Request succeeded in ' + (10 - callTimesLeft) + ' tries.';
                 }
                 else {
                     document.getElementById("demo").innerHTML =
@@ -58,8 +56,19 @@ function fetchData(x) {
         });
 }
 
-function addData() {
-    var request = new Request(url + 'op=insert&key=' + key + '&title=' + prompt('Enter title') + '&author=' + prompt('Enter author'), {
+function addData(x, title, author) {
+    if (x == 'undefined' || x < 1) {
+        callTimesLeft = 0;
+        document.getElementById("demo").innerHTML = 
+            'Request failed after 10 tries.';
+        return;
+    } else {
+        callTimesLeft = x;
+    }
+    callTimesLeft -= 1;
+
+    console.log(callTimesLeft);
+    var request = new Request(url + 'op=insert&key=' + key + '&title=' + title + '&author=' + author, {
         method: 'post',
     });
     fetch(request).then(
@@ -75,11 +84,13 @@ function addData() {
                 console.log(data);
                 if (data.status === "success") {
                     document.getElementById("demo").innerHTML =
-                        data.status;
+                        data.status + '<br>' + 'Request succeeded in ' + (10 - callTimesLeft) + ' tries.';
                 }
                 else {
                     document.getElementById("demo").innerHTML =
                         data.status + ' ' + data.message;
+                        console.log('call times left: ' + callTimesLeft);
+                        addData(callTimesLeft, title, author);
                 }
             });
         }
@@ -89,8 +100,19 @@ function addData() {
         });
 }
 
-function modifyData() {
-    var request = new Request(url + 'op=update&key=' + key + '&id=' + prompt('Enter id') + '&title=' + prompt('Enter title') + '&author=' + prompt('Enter author'), {
+function modifyData(x, id, title, author) {
+    if (x == 'undefined' || x < 1) {
+        callTimesLeft = 0;
+        document.getElementById("demo").innerHTML = 
+            'Request failed after 10 tries.';
+        return;
+    } else {
+        callTimesLeft = x;
+    }
+    callTimesLeft -= 1;
+
+    console.log(callTimesLeft);
+    var request = new Request(url + 'op=update&key=' + key + '&id=' + id + '&title=' + title + '&author=' + author, {
         method: 'post',
     });
     fetch(request).then(
@@ -106,11 +128,13 @@ function modifyData() {
                 console.log(data);
                 if (data.status === "success") {
                     document.getElementById("demo").innerHTML =
-                        data.status;
+                        data.status + '<br>' + 'Request succeeded in ' + (10 - callTimesLeft) + ' tries.';
                 }
                 else {
                     document.getElementById("demo").innerHTML =
                         data.status + ' ' + data.message;
+                        console.log('call times left: ' + callTimesLeft);
+                        modifyData(callTimesLeft, id, title, author);
                 }
             });
         }
@@ -120,8 +144,19 @@ function modifyData() {
         });
 }
 
-function deleteData() {
-    var request = new Request(url + 'op=delete&key=' + key + '&id=' + prompt('Enter id'), {
+function deleteData(x, id) {
+    if (x == 'undefined' || x < 1) {
+        callTimesLeft = 0;
+        document.getElementById("demo").innerHTML = 
+            'Request failed after 10 tries.';
+        return;
+    } else {
+        callTimesLeft = x;
+    }
+    callTimesLeft -= 1;
+
+    console.log(callTimesLeft);
+    var request = new Request(url + 'op=delete&key=' + key + '&id=' + id, {
         method: 'post',
     });
     fetch(request).then(
@@ -137,11 +172,13 @@ function deleteData() {
                 console.log(data);
                 if (data.status === "success") {
                     document.getElementById("demo").innerHTML =
-                        data.status;
+                        data.status  + '<br>' + 'Request succeeded in ' + (10 - callTimesLeft) + ' tries.';
                 }
                 else {
                     document.getElementById("demo").innerHTML =
                         data.status + ' ' + data.message;
+                        console.log('call times left: ' + callTimesLeft);
+                        deleteData(callTimesLeft, id);
                 }
             });
         }
