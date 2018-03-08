@@ -5,17 +5,18 @@
   <meta charset="utf-8">
   <title>Webblab 2 - Javascript</title>
   <link rel="stylesheet" type="text/css" href="lab2style.css">
+  <link rel="shortcut icon" href="favicon.ico" />
 </head>
 
 <body>
   <div class="wrapper">
     <div class="dark-gray aside">
       <div class="header">Menu</div>
-      <button class="button" onclick="fetchData(10);">📚 - Fetch Books</button>
-      <button class="button" onclick="addData(10, prompt('Enter title'), prompt('Enter author'));">📕 - Add Book</button>
-      <button class="button" onclick="modifyData(10, prompt('Enter id'), prompt('Enter title'), prompt('Enter author'));">🔧 - Modify Book</button>
-      <button class="button" onclick="deleteData(10, prompt('Enter id'));">🗑️ - Delete Book</button>
-      <button class="button" onclick="getNewKey();">🔑 - Get New Key</button>
+      <button onclick="fetchData(10);">📚 - Fetch Books</button>
+      <button onclick="addDataSetup();">📕 - Add Book</button>
+      <button onclick="modifyDataSetup();">🔧 - Modify Book</button>
+      <button onclick="deleteDataSetup();">🗑️ - Delete Book</button>
+      <button onclick="getNewKey();">🔑 - Get New Key</button>
       <input id="searchInput" oninput="searchArray();" onfocus="this.value=''" type="text" value="Search Title">
       <div>
         <div id="searchResult"></div>

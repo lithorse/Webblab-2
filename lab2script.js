@@ -56,7 +56,14 @@ function fetchData(x) {
         });
 }
 
+function addDataPrimer(){
+    var title = document.getElementById('title').value; 
+    var author = document.getElementById('author').value;
+    addData(10, title, author);
+}
+
 function addData(x, title, author) {
+    var x = 10;
     if (x == 'undefined' || x < 1) {
         callTimesLeft = 0;
         document.getElementById("demo").innerHTML = 
@@ -68,6 +75,7 @@ function addData(x, title, author) {
     callTimesLeft -= 1;
 
     console.log(callTimesLeft);
+    
     var request = new Request(url + 'op=insert&key=' + key + '&title=' + title + '&author=' + author, {
         method: 'post',
     });
@@ -98,6 +106,13 @@ function addData(x, title, author) {
         .catch(function (err) {
             console.log('Fetch Error :-S', err);
         });
+}
+
+function modifyDataPrimer(){
+    var id = document.getElementById('id').value; 
+    var title = document.getElementById('title').value; 
+    var author = document.getElementById('author').value;
+    modifyData(10, id, title, author);
 }
 
 function modifyData(x, id, title, author) {
@@ -142,6 +157,11 @@ function modifyData(x, id, title, author) {
         .catch(function (err) {
             console.log('Fetch Error :-S', err);
         });
+}
+
+function deleteDataPrimer(){
+    var id = document.getElementById('id').value; 
+    deleteData(10, id);    
 }
 
 function deleteData(x, id) {
@@ -290,3 +310,66 @@ function searchArray() {
         document.getElementById('searchResult').innerHTML = '';
     }
 };
+
+function addDataSetup(){
+    document.getElementById("demo").innerHTML = '';
+    var btn = document.createElement("BUTTON");
+    btn.id = 'button';
+    var titleInput = document.createElement("INPUT");
+    titleInput.id = 'title';
+    var authorInput = document.createElement("INPUT");
+    authorInput.id = 'author';
+    var titleText = document.createTextNode("Enter Title");
+    var authorText = document.createTextNode("Enter Author");
+
+    btn.innerText = 'Submit';
+    btn.setAttribute('class', 'buttonSubmit');
+    document.getElementById("demo").appendChild(titleText);
+    document.getElementById("demo").appendChild(titleInput);
+    document.getElementById("demo").appendChild(authorText);
+    document.getElementById("demo").appendChild(authorInput);
+    document.getElementById("demo").appendChild(btn);
+    document.getElementById("button").onclick = addDataPrimer;
+}
+
+function modifyDataSetup(){
+    document.getElementById("demo").innerHTML = '';
+    var btn = document.createElement("BUTTON");
+    btn.id = 'button';
+    var idInput = document.createElement("INPUT");
+    idInput.id = 'id';
+    var titleInput = document.createElement("INPUT");
+    titleInput.id = 'title';
+    var authorInput = document.createElement("INPUT");
+    authorInput.id = 'author';
+    var titleText = document.createTextNode("Enter Title");
+    var authorText = document.createTextNode("Enter Author");
+    var idText = document.createTextNode("Enter Id");
+
+    btn.innerText = 'Submit';
+    btn.setAttribute('class', 'buttonSubmit');
+    document.getElementById("demo").appendChild(idText);
+    document.getElementById("demo").appendChild(idInput);
+    document.getElementById("demo").appendChild(titleText);
+    document.getElementById("demo").appendChild(titleInput);
+    document.getElementById("demo").appendChild(authorText);
+    document.getElementById("demo").appendChild(authorInput);
+    document.getElementById("demo").appendChild(btn);
+    document.getElementById("button").onclick = modifyDataPrimer;
+}
+
+function deleteDataSetup(){
+    document.getElementById("demo").innerHTML = '';
+    var btn = document.createElement("BUTTON");
+    btn.id = 'button';
+    var idInput = document.createElement("INPUT");
+    idInput.id = 'id';
+    var idText = document.createTextNode("Enter Id");
+
+    btn.innerText = 'Submit';
+    btn.setAttribute('class', 'buttonSubmit');
+    document.getElementById("demo").appendChild(idText);
+    document.getElementById("demo").appendChild(idInput);
+    document.getElementById("demo").appendChild(btn);
+    document.getElementById("button").onclick = deleteDataPrimer;
+}
