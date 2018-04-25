@@ -7,4 +7,4 @@ Objective:
 - Learn JavaScript DOM manipulation
 
 Technologies used:
-JSON, JavaSqritp, AJAZ, HTML, CSS
+JSON, JavaScript, AJAX, HTML, CSS
